@@ -1,4 +1,4 @@
-import { db } from '../../index.js';
+import { prisma } from '../../index.js';
 
 export const hello = {
   Query: {
@@ -6,9 +6,7 @@ export const hello = {
   },
   Mutation: {
     addHello: async () => {
-      await db.collection('test').insertOne({
-        hello: 'hello'
-      });
+      await prisma.hello.create({ data: { content: 'hello' } });
 
       return true;
     }
