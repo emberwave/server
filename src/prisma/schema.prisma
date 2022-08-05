@@ -7,7 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model hello {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  content String
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String
+  tags      String[]
+  upvotes   Int
+  downvotes Int
+  createdAt DateTime
 }

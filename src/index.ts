@@ -20,10 +20,10 @@ const rest = {
 };
 
 // graphql
-import { hello as gql_hello } from './graphql/resolvers/hello.js';
+import { post as gql_post } from './graphql/resolvers/post.js';
 
 const graphql = {
-  hello: gql_hello
+  post: gql_post
 };
 
 const color = gradient(['#8229c6', '#2bf2e5']);
@@ -40,7 +40,7 @@ export const db = client.db();
   const schema = loadSchemaSync(join('src', 'graphql', 'schemas', '*.gql'), { loaders: [new GraphQLFileLoader()] });
   const server = new ApolloServer({
     typeDefs: schema,
-    resolvers: [graphql.hello],
+    resolvers: [graphql.post],
     context: ({ req, res }: { req: req; res: res }) => ({ req, res })
   });
 

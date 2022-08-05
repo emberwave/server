@@ -1,7 +1,17 @@
 type Query {
-  hello: String!
+  post(id: ID!): Post!
 }
 
 type Mutation {
-  addHello: Boolean!
+  createPost(title: String!, content: String, tags: [String]!): String!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  tags: [String]!
+  upvotes: Int!
+  downvotes: Int!
+  createdAt: String!
 }
