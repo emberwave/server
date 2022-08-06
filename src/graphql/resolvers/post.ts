@@ -5,6 +5,9 @@ export const post = {
   Query: {
     post: async (_: any, { id }: { id: string }) => {
       return await prisma.post.findUnique({ where: { id } });
+    },
+    posts: async (_: any) => {
+      return await prisma.post.findMany({});
     }
   },
   Mutation: {
@@ -20,6 +23,7 @@ export const post = {
           tags,
           upvotes: 0,
           downvotes: 0,
+          supervotes: 0,
           createdAt: new Date()
         }
       });

@@ -1,5 +1,6 @@
 type Query {
   post(id: ID!): Post!
+  posts: [Post]!
 }
 
 type Mutation {
@@ -13,5 +14,6 @@ type Post {
   tags: [String]!
   upvotes: Int!
   downvotes: Int!
+  supervotes: Int!
   createdAt: String!
 }

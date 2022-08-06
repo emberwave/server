@@ -7,12 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// TODO: add authors and users later
 model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  content   String
-  tags      String[]
-  upvotes   Int
-  downvotes Int
-  createdAt DateTime
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  content    String
+  tags       String[]
+  upvotes    Int
+  downvotes  Int
+  supervotes Int
+  createdAt  DateTime
 }
