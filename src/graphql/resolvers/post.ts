@@ -6,8 +6,12 @@ export const post = {
     post: async (_: any, { id }: { id: string }) => {
       return await prisma.post.findUnique({ where: { id } });
     },
-    posts: async (_: any) => {
-      return await prisma.post.findMany({});
+    posts: async (_: any, { newest }: { newest: boolean }) => {
+      if (newest)
+        return await prisma.post.findMany({
+          orderBy: { id: 'desc' }
+        });
+      else return await prisma.post.findMany({});
     }
   },
   Mutation: {
