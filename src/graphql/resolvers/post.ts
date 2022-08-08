@@ -15,13 +15,14 @@ export const post = {
     }
   },
   Mutation: {
-    createPost: async (_: any, { title, content = '', tags = [] }: Post) => {
+    createPost: async (_: any, { authorId, title, content = '', tags = [] }: Post) => {
       if (title.length === 0) throw new Error('title must be over 0 characters');
 
       tags.length = 5; // limit to 5 tags
 
       await prisma.post.create({
         data: {
+          authorId,
           title,
           content,
           tags,

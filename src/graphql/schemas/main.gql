@@ -1,14 +1,17 @@
 type Query {
   post(id: ID!): Post!
   posts(newest: Boolean): [Post]!
+  user(id: ID!): User!
 }
 
 type Mutation {
-  createPost(title: String!, content: String, tags: [String]!): String!
+  createPost(authorId: ID!, title: String!, content: String, tags: [String]!): String!
+  registerUser(alias: String!, email: String!, password: String!): String!
 }
 
 type Post {
   id: ID!
+  author: User!
   title: String!
   content: String!
   tags: [String]!
@@ -16,4 +19,16 @@ type Post {
   downvotes: Int!
   supervotes: Int!
   createdAt: String!
+}
+
+type User {
+  id: ID!
+  tag: String!
+  tagNumber: String!
+  email: String!
+  password: String!
+  alias: String!
+  bio: String
+  posts: [Post]!
+  createdAt: String
 }

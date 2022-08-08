@@ -12,9 +12,31 @@ model Post {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   title      String
   content    String
+  author     User     @relation(fields: [authorId], references: [id])
+  authorId   String   @db.ObjectId
   tags       String[]
   upvotes    Int
   downvotes  Int
   supervotes Int
   createdAt  DateTime
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  tag       String
+  tagNumber String
+  email     String   @unique
+  password  String
+  alias     String
+  bio       String
+  createdAt DateTime
+  Post      Post[]
+
+  @@unique([tag, tagNumber])
+}
+
+model UsedTagNumbers {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  tag       String   @unique
+  tagNumber String[]
 }

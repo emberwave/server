@@ -21,9 +21,11 @@ const rest = {
 
 // graphql
 import { post as gql_post } from './graphql/resolvers/post.js';
+import { user as gql_user } from './graphql/resolvers/user.js';
 
 const graphql = {
-  post: gql_post
+  post: gql_post,
+  user: gql_user
 };
 
 const color = gradient(['#8229c6', '#2bf2e5']);
@@ -40,7 +42,7 @@ export const db = client.db();
   const schema = loadSchemaSync(join('src', 'graphql', 'schemas', '*.gql'), { loaders: [new GraphQLFileLoader()] });
   const server = new ApolloServer({
     typeDefs: schema,
-    resolvers: [graphql.post],
+    resolvers: [graphql.post, graphql.user],
     context: ({ req, res }: { req: req; res: res }) => ({ req, res })
   });
 
