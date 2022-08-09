@@ -27,7 +27,6 @@ export const user = {
           }
         });
         if (tags?.tagNumber.length === 10) {
-          console.log(tags);
           return true;
         } else return false;
       };
