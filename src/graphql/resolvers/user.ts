@@ -4,7 +4,22 @@ import { prisma } from '../../index.js';
 export const user = {
   Query: {
     user: async (_: any, { id }: { id: string }) => {
-      return await prisma.post.findUnique({ where: { id } });
+      const user = await prisma.user.findUnique({ where: { id } });
+      const userPosts = await prisma.post.findMany({ where: { authorId: id } });
+
+      if (!user) throw new Error('user not found');
+
+      console.log(userPosts);
+
+      return {
+        id,
+        tag: user.tag,
+        tagNumber: user.tagNumber,
+        alias: user.alias,
+        bio: user.bio,
+        posts: userPosts,
+        createdAt: user.createdAt
+      };
     }
   },
   Mutation: {
