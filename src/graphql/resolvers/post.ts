@@ -23,11 +23,29 @@ export const post = {
       };
     },
     posts: async (_: any, { newest }: { newest: boolean }) => {
-      if (newest)
-        return await prisma.post.findMany({
+      let posts: Post[];
+      if (newest) {
+        posts = await prisma.post.findMany({
           orderBy: { id: 'desc' }
         });
-      else return await prisma.post.findMany({});
+      } else posts = await prisma.post.findMany({});
+
+      const postsWithAuthors = posts.map(async (post: Post) => {
+        const author = await prisma.user.findUnique({ where: { id: post.authorId } });
+        return {
+          ...post,
+          author: {
+            id: post.authorId,
+            tag: author!.tag,
+            tagNumber: author!.tagNumber,
+            alias: author!.alias,
+            bio: author!.bio,
+            createdAt: author!.createdAt
+          }
+        };
+      });
+
+      return postsWithAuthors;
     }
   },
   Mutation: {

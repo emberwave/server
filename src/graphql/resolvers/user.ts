@@ -9,8 +9,6 @@ export const user = {
 
       if (!user) throw new Error('user not found');
 
-      console.log(userPosts);
-
       return {
         id,
         tag: user.tag,
@@ -41,7 +39,7 @@ export const user = {
             tag: alias
           }
         });
-        if (tags?.tagNumber.length === 10) {
+        if (tags?.tagNumber.length === 9999) {
           return true;
         } else return false;
       };
@@ -57,8 +55,8 @@ export const user = {
           });
 
           let randomTag: number;
-          if (!tags) randomTag = generateRandomNum(1, 10, []);
-          else randomTag = generateRandomNum(1, 10, tags!.tagNumber.map(Number));
+          if (!tags) randomTag = generateRandomNum(1, 9999, []);
+          else randomTag = generateRandomNum(1, 9999, tags!.tagNumber.map(Number));
 
           if (!tags) {
             await prisma.usedTagNumbers.create({
